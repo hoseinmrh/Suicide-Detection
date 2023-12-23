@@ -4,6 +4,7 @@ from transformers import BertTokenizer, BertForSequenceClassification, AdamW, ge
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 from tqdm import tqdm
+import pandas as pd
 
 # Load your dataset
 dataset_path = "dataset/Suicide_Detection.csv"
@@ -20,15 +21,15 @@ model = BertForSequenceClassification.from_pretrained(model_name, num_labels=len
 # Tokenize the input data
 X_train_tokens = tokenizer(list(X_train), padding=True, truncation=True, return_tensors='pt', max_length=128)
 X_test_tokens = tokenizer(list(X_test), padding=True, truncation=True, return_tensors='pt', max_length=128)
-
+print("After Tokenize")
 # Convert labels to tensors
 y_train_tensor = torch.tensor(y_train.map({'suicide': 1, 'non-suicide': 0}).values)
 y_test_tensor = torch.tensor(y_test.map({'suicide': 1, 'non-suicide': 0}).values)
-
+print("After Convert labels to tensors")
 # Create DataLoader for training and testing sets
 train_dataset = TensorDataset(X_train_tokens['input_ids'], X_train_tokens['attention_mask'], y_train_tensor)
 test_dataset = TensorDataset(X_test_tokens['input_ids'], X_test_tokens['attention_mask'], y_test_tensor)
-
+print("After Create DataLoader for training and testing sets")
 batch_size = 16
 train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
@@ -37,10 +38,11 @@ test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 epochs = 3
 optimizer = AdamW(model.parameters(), lr=2e-5, eps=1e-8)
 scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=len(train_dataloader) * epochs)
-
+print("After Set up training parameters")
 # Training loop
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model.to(device)
+print(device)
 
 for epoch in range(epochs):
     model.train()
@@ -75,6 +77,7 @@ with torch.no_grad():
         predictions = torch.argmax(logits, dim=1).cpu().numpy()
         all_predictions.extend(predictions)
 
+
 # Convert predictions back to original labels
 predicted_labels = ['Suicidal' if pred == 1 else 'Non Suicidal' for pred in all_predictions]
 
@@ -85,3 +88,15 @@ print(f'Accuracy: {accuracy:.2f}')
 # Display classification report
 print('\nClassification Report:')
 print(classification_report(y_test, predicted_labels))
+
+# Save the trained model
+model_save_path = 'bert_model.pth'
+torch.save({
+    'model_state_dict': model.state_dict(),
+    'tokenizer_state_dict': tokenizer.state_dict(),
+    'optimizer_state_dict': optimizer.state_dict(),
+    'scheduler_state_dict': scheduler.state_dict(),
+    'epochs': epochs,
+}, model_save_path)
+
+print(f'Model saved at: {model_save_path}')
