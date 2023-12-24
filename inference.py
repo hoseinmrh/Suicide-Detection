@@ -11,12 +11,13 @@ loaded_classifier, loaded_tfidf_vectorizer = joblib.load(model_filename)
 
 
 # Function to predict suicidal text using the loaded model
-def predict_suicidal_text_loaded(text):
-    english_text = translation.translate_persian_to_english(text)
-    text_tfidf = loaded_tfidf_vectorizer.transform([english_text])
+def predict_suicidal_text_loaded(text, lang):
+    if lang == "fa":
+        text = translation.translate_persian_to_english(text)
+    text_tfidf = loaded_tfidf_vectorizer.transform([text])
     score = loaded_classifier.predict_proba(text_tfidf)[0]
     prediction = loaded_classifier.predict(text_tfidf)
-    return prediction[0], english_text, score
+    return prediction[0], text, score
 
 
 # Example usage with the loaded model
