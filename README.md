@@ -10,7 +10,7 @@
 <li>inference.py : Script to predict and classify using pre-trained model</li>
 <li>model.joblib : Pre-Trained model using naive bayes classification</li>
 <li>requirements.txt : Requirements file</li>
-<li>train_bm.py : Script to train model</li>
+<li>train_nb.py : Script to train model</li>
 </ul>
 <hr>
 
