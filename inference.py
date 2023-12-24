@@ -1,5 +1,5 @@
 import joblib
-from lib import tranlation
+from lib import translation
 
 # Simple model
 # Load the saved classifier and vectorizer
@@ -9,7 +9,7 @@ loaded_classifier, loaded_tfidf_vectorizer = joblib.load(model_filename)
 
 # Function to predict suicidal text using the loaded model
 def predict_suicidal_text_loaded(text):
-    english_text = tranlation.translate_persian_to_english(text)
+    english_text = translation.translate_persian_to_english(text)
     text_tfidf = loaded_tfidf_vectorizer.transform([english_text])
     prediction = loaded_classifier.predict(text_tfidf)
     return prediction[0], english_text
