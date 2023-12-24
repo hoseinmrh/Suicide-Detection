@@ -1,10 +1,12 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import accuracy_score, classification_report
-from text_processing import create_tfidf_vectorizer
 import joblib
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+from lib.text_processing import create_tfidf_vectorizer
+
 
 # Load your dataset
 dataset_path = 'dataset/Suicide_Detection.csv'

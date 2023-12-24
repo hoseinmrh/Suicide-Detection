@@ -12,3 +12,4 @@
 .snapshots/*
 python
 dataset
+train.py
