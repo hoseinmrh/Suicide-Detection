@@ -1,4 +1,4 @@
-## Suicide Detection From Persian Input
+## Suicide Detection From User Input (Persian and English)
 
 <h4>In this project we are using different machine learning and deep learning model to detect if a message is suicidal or not</h4>
 <hr>
@@ -34,5 +34,6 @@ inference.py</em>
 <ul>
 <li>Train model using deep learning methods</li>
 <li>Deploy api</li>
+<li>Enhance translation and add more languages</li>
 </ul>
 
