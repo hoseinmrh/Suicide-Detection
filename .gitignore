@@ -11,5 +11,5 @@
 *.app
 .snapshots/*
 python
-dataset
+dataset/*.csv
 train.py
