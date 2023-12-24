@@ -22,6 +22,9 @@ class InputData(BaseModel):
 
 @app.post("/suicide-detection")
 async def detect_suicide(input_data: InputData):
-    result, english_text = inference.predict_suicidal_text_loaded(input_data.text)
-    return {"result": result, "english_text": english_text}
+    result, english_text, score = inference.predict_suicidal_text_loaded(input_data.text)
+    non_suicidal_rate = round(score[0]*100, 0)
+    suicidal_rate = round(score[1] * 100, 0)
+    return {"result": result, "english_text": english_text, "suicidal_rate": suicidal_rate,
+            "non_suicidal_rate": non_suicidal_rate}
 
