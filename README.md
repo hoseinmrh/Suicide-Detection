@@ -1,4 +1,4 @@
-## Suicide Detection From User Input (Persian and English currently)
+## Suicide Detection From User Input
 
 <h4>In this project we are using different machine learning and deep learning model to detect if a message is suicidal or not</h4>
 <hr>
