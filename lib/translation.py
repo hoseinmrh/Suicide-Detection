@@ -1,8 +1,8 @@
 from googletrans import Translator
 
-def translate_persian_to_english(text):
+def translate_to_english(text, src_lang):
     translator = Translator()
-    translation = translator.translate(text, src='fa', dest='en')
+    translation = translator.translate(text, src=src_lang, dest='en')
     return translation.text
 
 # Example usage
