@@ -1,4 +1,7 @@
 import joblib
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 from lib import translation, lang_detection
 
 # Simple model
