@@ -1,16 +1,11 @@
-FROM python:3.10.13-slim
+FROM python:3.9
 
 WORKDIR /usr/src/app
 
-RUN pip install virtualenv
-RUN python -m venv python
-RUN . python/bin/activate
+COPY ./requirements.txt ./requirements.txt
 
-COPY ./requirements.txt .
-RUN pip install -r requirements.txt --no-cache-dir
+RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
+
 COPY . .
 
-WORKDIR /usr/src/app/api
-CMD ["uvicorn", "detect_suicide_api:app","--host", "0.0.0.0", "--port", "80"]
-
-EXPOSE 80
+CMD ["uvicorn", "app.main:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "80"]
