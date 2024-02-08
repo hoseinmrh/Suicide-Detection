@@ -5,7 +5,7 @@ import joblib
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from lib.text_processing import create_tfidf_vectorizer
+from textProcessing.text_processing import create_tfidf_vectorizer
 
 
 # Load your dataset
@@ -28,6 +28,6 @@ classifier = MultinomialNB()
 classifier.fit(X_train_tfidf, y_train)
 
 # Save the trained classifier and vectorizer
-model_filename = 'model.joblib'
+model_filename = 'predict/model/model.joblib'
 joblib.dump((classifier, tfidf_vectorizer), model_filename)
 print(f'Model saved at: {model_filename}')

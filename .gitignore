@@ -30,7 +30,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+langDetect/
 lib64/
 parts/
 sdist/
@@ -169,3 +169,4 @@ dmypy.json
 cython_debug/
 # Ignore pycatch
 *.pyc
+req.txt
