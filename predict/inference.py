@@ -33,5 +33,5 @@ def predict_suicidal_text_loaded(text):
     score = loaded_classifier.predict_proba(text_tfidf)[0]
     prediction = loaded_classifier.predict(text_tfidf)
     # Return prediction, Translated text to English and Scores
-    return prediction[0], text, score
+    return prediction[0], text, score, lang_d
 
