@@ -1,5 +1,7 @@
 ## Suicide Detection From User Input
 
+### [Link](https://suicide-detection.vercel.app/) to run and test
+
 <h4>In this project we are using different machine learning and deep learning model to detect if a message is suicidal or not</h4>
 <hr>
 <h3>Project Structure</h3>
