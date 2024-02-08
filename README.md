@@ -4,9 +4,8 @@
 <hr>
 <h3>Project Structure</h3>
 <ul>
-<li>api/ : Api folder contains the api using FastAPI</li>
+<li>app/ : Api folder contains the api using FastAPI</li>
 <li>dataset/ : You can put your dataset here. <a href="https://www.kaggle.com/datasets/nikhileswarkomati/suicide-watch?resource=download">link</a></li>
-<li>lib/ : This folder contains some useful modules</li>
 <li>inference.py : Script to predict and classify using pre-trained model</li>
 <li>model.joblib : Pre-Trained model using naive bayes classification</li>
 <li>requirements.txt : Requirements file</li>
